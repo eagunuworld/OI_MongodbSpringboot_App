@@ -106,18 +106,18 @@ pipeline {
     stage('ManifestK8SVulnerabilitYScanning') {  
       steps {
          parallel(
-               "ScanningAppImage": {
-                    sh "bash trivy-k8s-scan.sh" 
-                  },
-                  "ScanningDeploymentFile": {
-                    sh 'docker run --rm -v $(pwd):/project openpolicyagent/conftest test --policy opa-k8s-security.rego mss-north-west-deploy.yml'
-                   },
-                  //  "BasedImage": {
-                  //   sh "docker run --rm -v $(pwd):/project openpolicyagent/conftest test --policy opa-docker-security.rego Dockerfile"
-                  //  },
-                 "kubesec Scannning": {
-                  sh 'bash kubesec-scan.sh'
-                },
+              //  "ScanningAppImage": {
+              //       sh "bash trivy-k8s-scan.sh" 
+              //     },
+              //     "ScanningDeploymentFile": {
+              //       sh 'docker run --rm -v $(pwd):/project openpolicyagent/conftest test --policy opa-k8s-security.rego mss-north-west-deploy.yml'
+              //      },
+              //     //  "BasedImage": {
+              //     //   sh "docker run --rm -v $(pwd):/project openpolicyagent/conftest test --policy opa-docker-security.rego Dockerfile"
+              //     //  },
+              //    "kubesec Scannning": {
+              //     sh 'bash kubesec-scan.sh'
+              //   },
                 "Master": {
                sh "bash cis-benchmark-master.sh"
               },
