@@ -21,14 +21,6 @@ spec:
         image: mongo
         ports:
           - containerPort: 27017
-        # securityContext:
-        #   capabilities:
-        #     drop:
-        #      - NET_RAW
-        #   runAsUser: 100
-        #   runAsNonRoot: true
-        #   readOnlyRootFilesystem: true
-        #   allowPrivilegeEscalation: false
         resources:
          requests:
           memory: "256Mi"
