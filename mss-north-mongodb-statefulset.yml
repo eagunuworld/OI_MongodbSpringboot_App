@@ -17,7 +17,7 @@ spec:
     spec:
       serviceAccountName: default
       volumes:
-      - name: vol
+      - name: vo2
         emptyDir: {}
       containers:
       - name: mongo
@@ -26,7 +26,7 @@ spec:
           - containerPort: 27017
         volumeMounts:
           - mountPath: /tmp
-            name: vol
+            name: vo2
         securityContext:
           capabilities:
             drop:
