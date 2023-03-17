@@ -16,25 +16,19 @@ spec:
         app: mongo
     spec:
       serviceAccountName: default
-      volumes:
-      - name: vo2
-        emptyDir: {}
       containers:
       - name: mongo
         image: mongo
         ports:
           - containerPort: 27017
-        volumeMounts:
-          - mountPath: /tmp
-            name: vo2
-        securityContext:
-          capabilities:
-            drop:
-             - NET_RAW
-          runAsUser: 100
-          runAsNonRoot: true
-          readOnlyRootFilesystem: true
-          allowPrivilegeEscalation: false
+        # securityContext:
+        #   capabilities:
+        #     drop:
+        #      - NET_RAW
+        #   runAsUser: 100
+        #   runAsNonRoot: true
+        #   readOnlyRootFilesystem: true
+        #   allowPrivilegeEscalation: false
         resources:
          requests:
           memory: "256Mi"
