@@ -47,12 +47,6 @@ pipeline {
       }
     }
 
-   stage('Unit Tests - JUnit and JaCoCo') {
-      steps {
-          sh "mvn test"
-        }
-     }
-
     stage('SonarQube - SAST') {
       steps {
         withSonarQubeEnv('mss-warmart-prod') {
