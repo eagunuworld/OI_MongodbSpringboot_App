@@ -4,7 +4,7 @@ metadata:
   name: springapp
   namespace: mss-warmart-prod
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: springapp
