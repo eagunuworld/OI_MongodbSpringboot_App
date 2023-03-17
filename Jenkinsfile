@@ -15,7 +15,7 @@ pipeline {
         }
 
      parameters {
-          choice choices: ['main', 'owasp_zap_scanning','slack_success_failed_demo', 'lab_mutation_Test', 'walmart-dev-mss', 'dependencyCheckTrivyOpenContest'], description: 'This is choice paramerized job', name: 'BranchName'
+          choice choices: ['main', 'mss-warmart-prod', 'owasp_zap_scanning', 'slack_success_failed_demo', 'lab_mutation_Test', 'walmart-dev-mss', 'dependencyCheckTrivyOpenContest'], description: 'This is choice paramerized job', name: 'BranchName'
           string defaultValue: 'Eghosa DevOps', description: 'please developer select the person\' name', name: 'personName'
         }
 
