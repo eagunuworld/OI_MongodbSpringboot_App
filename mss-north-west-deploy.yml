@@ -20,11 +20,18 @@ spec:
       labels:
         app: springapp
     spec:
+      serviceAccountName: default
+      volumes:
+      - name: vol
+        emptyDir: {}
       containers:
       - name: springapp
         image: replace
         ports:
         - containerPort: 8080
+        volumeMounts:
+          - mountPath: /tmp
+            name: vol
         securityContext:
           capabilities:
             drop:

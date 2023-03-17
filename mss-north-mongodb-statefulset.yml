@@ -16,11 +16,17 @@ spec:
         app: mongo
     spec:
       serviceAccountName: default
+      volumes:
+      - name: vol
+        emptyDir: {}
       containers:
       - name: mongo
         image: mongo
         ports:
           - containerPort: 27017
+        volumeMounts:
+          - mountPath: /tmp
+            name: vol
         securityContext:
           capabilities:
             drop:
