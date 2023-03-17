@@ -137,7 +137,7 @@ pipeline {
          }
       }
 
-    stage('west-prod') {
+    stage('comSecretMongodb') {
       steps {
         parallel(
           "createconfigMap": {
