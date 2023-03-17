@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springapp
+  namespace: mss-warmart-prod
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: springapp
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 60
+  template:
+    metadata:
+      name: springapp
+      labels:
+        app: springapp
+    spec:
+      containers:
+      - name: springapp
+        image: eagunuworld/eagunu-mongo-db:1
+        ports:
+        - containerPort: 8080
+        securityContext:
+          capabilities:
+            drop:
+             - NET_RAW
+          runAsUser: 100
+          runAsNonRoot: true
+          readOnlyRootFilesystem: true
+          allowPrivilegeEscalation: false
+        resources:
+         requests:
+          memory: "256Mi"
+          cpu: "200m"
+         limits:
+          memory: "512Mi"
+          cpu: "500m"
+        env:
+          - name: MONGO_DB_HOSTNAME
+            value: mongo
+          - name: MONGO_DB_USERNAME
+            valueFrom:
+              configMapKeyRef:
+                name: username-pwd
+                key: mongodb_username
+          - name: MONGO_DB_PASSWORD
+            valueFrom:
+              configMapKeyRef:
+                name: username-pwd
+                key: mongodb_password

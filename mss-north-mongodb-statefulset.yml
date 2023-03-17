@@ -1,0 +1,60 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mongo
+  namespace: mss-warmart-prod
+spec:
+  selector:
+    matchLabels:
+      app: mongo
+  serviceName: "mongo"
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: mongo
+    spec:
+      serviceAccountName: default
+      containers:
+      - name: mongo
+        image: mongo
+        ports:
+          - containerPort: 27017
+        securityContext:
+          capabilities:
+            drop:
+             - NET_RAW
+          runAsUser: 100
+          runAsNonRoot: true
+          readOnlyRootFilesystem: true
+          allowPrivilegeEscalation: false
+        resources:
+         requests:
+          memory: "256Mi"
+          cpu: "200m"
+         limits:
+          memory: "512Mi"
+          cpu: "500m"
+        env:
+          - name: MONGO_INITDB_ROOT_USERNAME
+            valueFrom:
+              configMapKeyRef:
+                name: username-pwd
+                key: mongodb_username
+          - name: MONGO_INITDB_ROOT_PASSWORD
+            valueFrom:
+              configMapKeyRef:
+                name: username-pwd
+                key: mongodb_password
+        volumeMounts:
+          - name: mongo-persistent-storage
+            mountPath: /data/db
+  volumeClaimTemplates:
+    - metadata:
+        name: mongo-persistent-storage
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 1Gi
