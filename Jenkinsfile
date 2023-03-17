@@ -183,13 +183,13 @@ pipeline {
       }
 
   } // pipeline stages end here 
-  //  post {
-  //       always {
-  //       junit 'target/surefire-reports/*.xml'
-  //       jacoco execPattern: 'target/jacoco.exec'
-  //       pitmutation mutationStatsFile: '**/target/pit-reports/**/mutations.xml'
-  //       dependencyCheckPublisher pattern: 'target/dependency-check-report.xml'
-  //      }
+   post {
+      //   always {
+      //   junit 'target/surefire-reports/*.xml'
+      //   jacoco execPattern: 'target/jacoco.exec'
+      //   pitmutation mutationStatsFile: '**/target/pit-reports/**/mutations.xml'
+      //   dependencyCheckPublisher pattern: 'target/dependency-check-report.xml'
+      //  }
       success {
       script {
         /* Use slackNotifier.groovy from shared library and provide current build result as parameter */  
