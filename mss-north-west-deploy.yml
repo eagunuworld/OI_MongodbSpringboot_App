@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: springapp
-        image: eagunuworld/eagunu-mongo-db:1
+        image: replace
         ports:
         - containerPort: 8080
         securityContext:
