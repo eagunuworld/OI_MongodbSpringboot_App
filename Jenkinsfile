@@ -35,7 +35,7 @@ pipeline {
             svcName = "mss-warmart-prod-svc"
             svcPort = "30005"
             jenkinsURL = "http://34.125.154.81"
-            mss-node = "http://34.174.188.235"
+            mssNode = "http://34.174.188.235"
           }
 
   stages {
