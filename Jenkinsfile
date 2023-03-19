@@ -34,8 +34,8 @@ pipeline {
             conName = "mss-warmart-prod-con"
             svcName = "mss-warmart-prod-svc"
             svcPort = "30005"
-            jenkinsURL = "http://34.125.84.141"
-            serverURL = "http://34.174.188.235"
+            jenkinsURL = "http://34.125.154.81"
+            mss-node02 = "http://34.174.188.235"
           }
 
   stages {
@@ -50,7 +50,7 @@ pipeline {
     stage('SonarQube - SAST') {
       steps {
         withSonarQubeEnv('sonarQube') {
-          sh "mvn clean package sonar:sonar -Dsonar.projectKey=mss-warmart-prod -Dsonar.host.url=http://34.125.175.232:9000 -Dsonar.login=sqp_0da2b86135cf6f23388b6642a6aa68d64f8ac183"
+          sh "mvn clean package sonar:sonar -Dsonar.projectKey=mss-warmart-prod -Dsonar.host.url=http://34.125.124.143:9000 -Dsonar.login=sqp_0da2b86135cf6f23388b6642a6aa68d64f8ac183"
          }
         // timeout(time: 2, unit: 'MINUTES') {
         //   script {
