@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: username-pwd
-  namespace: mss-warmart-prod
+  namespace: mss-warmart
 data:
   mongodb_username: devdb
   mongodb_password: devdb@123

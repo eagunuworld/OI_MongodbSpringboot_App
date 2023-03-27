@@ -2,8 +2,6 @@
 
 pipeline {
   //agent any
-  //kubectl -n default create deploy node-app --image siddharth67/node-service:v1
-  //kubectl -n default expose deploy node-app --name node-service --port 5000
    agent{
       label "node01"
        }
@@ -34,8 +32,8 @@ pipeline {
             conName = "mss-warmart-prod-con"
             svcName = "mss-warmart-prod-svc"
             svcPort = "30005"
-            jenkinsURL = "http://34.125.154.81"
-            mssNode = "http://34.174.188.235"
+            jenkinsURL = "http://34.125.74.111"
+            mssNode = "http://34.174.110.253"
           }
 
   stages {
@@ -134,11 +132,11 @@ pipeline {
     stage('comSecretMongodb') {
       steps {
         parallel(
-          "createconfigMap": {
+          "configMap": {
               sh "kubectl apply -f mss-north-west-cm.yml"
             },
-          "mongodbDeployment": {
-              sh "kubectl apply -f  mss-north-mongodb-statefulset.yml"
+          "creatNS": {
+              sh "kubectl apply -f  mss-north-ns.yml"
           },
           "createSecret": {
               sh "kubectl apply -f mss-north-west-secret.yml"
@@ -162,8 +160,11 @@ pipeline {
               sh "sed -i 's#replace#${REGISTRY}:${VERSION}#g' mss-north-west-deploy.yml"
               sh "kubectl apply -f mss-north-west-deploy.yml"
             },
-          "Rollout West Status": {
-              sh "kubectl apply -f mss-north-svc.yml"
+          "create-svcs": {
+            sh "kubectl apply -f mss-north-svc.yml"
+          },
+          "mongoDB": {
+           sh "kubectl apply -f mss-north-mongodb-statefulset.yml"
           }
         )
       }

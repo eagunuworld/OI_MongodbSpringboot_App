@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: springapp
-  namespace: mss-warmart-prod
+  namespace: mss-warmart
 spec:
   replicas: 1
   selector:
