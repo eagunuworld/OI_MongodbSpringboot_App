@@ -180,7 +180,7 @@ pipeline {
                   sh 'docker rmi  $(docker images -q)'
                 },
                  "Display mss-warmart deploy": {
-               sh 'kubectl -n mss-warmart get po,svc'
+               sh 'kubectl -n mss-warmart get svc,po,pvc'
               }
              )
          }
